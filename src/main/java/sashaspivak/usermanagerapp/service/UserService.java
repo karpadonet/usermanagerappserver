@@ -27,31 +27,26 @@ public class UserService {
     }
 
     //find user by his id, if user wasn't found an exception will be thrown
-    public User findUserByUserName(User user) throws Throwable {
-      Optional<User> ret;
+    public User findUserByUserName(String userName, String password) throws Throwable {
       User tempUser;
 
-      ret = userRepo.findUserByUserName(user.getUserName());
-      tempUser = ret.get();
+      tempUser =  userRepo.findUserByUserName(userName).get();
 
-      //check if the user was found
-      if (tempUser != null)
+      //if a user with the user name was found
+      if (tempUser!=null)
       {
-        //if teh user was found check the users password
-        if (user.getPassword().equals(tempUser.getPassword()))
-        {
-            return tempUser;
+        //compare passwords
+        if (tempUser.getPassword().equals(password)) {
+          tempUser.setPassword("****"); //mask returned password
+          return tempUser;
         }
-        else {
-          throw new UserNotFoundException("Wrong password for user");
-        }
+        else
+          throw new UserNotFoundException("Wrong password");
       }
       else
       {
-        throw new UserNotFoundException("User by user name" + user.getUserName() + "was not found");
+        throw new UserNotFoundException("User not found");
       }
-
-
     }
 
     public User addUser(User user) {

@@ -22,11 +22,12 @@ public class UserResource {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/find")
-    public ResponseEntity<User> getUserByUserName(@RequestBody User user) throws Throwable {
-        User foundUser = userService.findUserByUserName(user);
-        return new ResponseEntity<>(foundUser, HttpStatus.OK);
-    }
+  @GetMapping("/find/{userName}+{password}")
+  public ResponseEntity<User> getUserByUserName(@PathVariable("userName") String userName,
+                                                @PathVariable("password") String password ) throws Throwable {
+    User user = userService.findUserByUserName(userName, password);
+    return new ResponseEntity<>(user, HttpStatus.OK);
+  }
 
     @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User user){
