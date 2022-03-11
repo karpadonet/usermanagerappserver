@@ -22,10 +22,10 @@ public class UserResource {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{userName}")
-    public ResponseEntity<User> getUserByUserName(@PathVariable("userName") String userName) throws Throwable {
-        User user = userService.findUserByUserName(userName);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    @GetMapping("/find")
+    public ResponseEntity<User> getUserByUserName(@RequestBody User user) throws Throwable {
+        User foundUser = userService.findUserByUserName(user);
+        return new ResponseEntity<>(foundUser, HttpStatus.OK);
     }
 
     @PutMapping("/update")

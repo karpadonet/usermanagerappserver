@@ -25,10 +25,33 @@ public class UserService {
     public User updateUser(User user){
         return userRepo.save(user);
     }
+
     //find user by his id, if user wasn't found an exception will be thrown
-    public User findUserByUserName(String userName) throws Throwable {
-        return userRepo.findUserByUserName(userName).orElseThrow(() -> new UserNotFoundException("User by user name" +
-                userName + "was not found"));
+    public User findUserByUserName(User user) throws Throwable {
+      Optional<User> ret;
+      User tempUser;
+
+      ret = userRepo.findUserByUserName(user.getUserName());
+      tempUser = ret.get();
+
+      //check if the user was found
+      if (tempUser != null)
+      {
+        //if teh user was found check the users password
+        if (user.getPassword().equals(tempUser.getPassword()))
+        {
+            return tempUser;
+        }
+        else {
+          throw new UserNotFoundException("Wrong password for user");
+        }
+      }
+      else
+      {
+        throw new UserNotFoundException("User by user name" + user.getUserName() + "was not found");
+      }
+
+
     }
 
     public User addUser(User user) {
@@ -36,6 +59,7 @@ public class UserService {
         user.setLoggedIn(false);
         user.setRegisterTime("");
         user.setLastUpdateTime("");
+        user.setIpAddress("");
 
         Optional<User> tempUser;
 
@@ -65,6 +89,7 @@ public class UserService {
                 user.setLoggedIn(tempUser.isLoggedIn());;
                 user.setLastUpdateTime(tempUser.getLastUpdateTime());
                 user.setRegisterTime(tempUser.getRegisterTime());
+                user.setIpAddress(tempUser.getIpAddress());
                 return userRepo.save(user);
             }
 
