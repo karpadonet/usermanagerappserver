@@ -48,7 +48,4 @@ public class UserResource {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-
-
-
 }

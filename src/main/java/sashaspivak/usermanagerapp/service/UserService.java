@@ -25,17 +25,18 @@ public class UserService {
       // For loop for iterating over the List
       for (int i = 0; i < user_list.size(); i++) {
 
-        // Print all elements of List
+        //hide the password when returning the user list from the server
         user_list.get(i).setPassword("****");
       }
 
       return user_list;
     }
+    //function updates the user registry
     public User updateUser(User user){
         return userRepo.save(user);
     }
 
-    //find user only by name
+    //function searches for the user by userName only
     public User findUser(String userName) throws Throwable
     {
       User tempUser;
@@ -50,6 +51,7 @@ public class UserService {
     }
 
     //find user by his id, if user wasn't found an exception will be thrown
+    //function searches user by user name and password
     public User findUserByUserName(String userName, String password) throws Throwable {
       User tempUser;
 
@@ -72,6 +74,7 @@ public class UserService {
       }
     }
 
+    //function adds a new user registry to the database
     public User addUser(User user) {
         //init new user
         user.setLoggedIn(false);
