@@ -78,14 +78,14 @@ public class UserService {
 
         if (tempUser != null){
             //checking users password
-            if(user.equals(tempUser))
+            if(user.getUserName().equals(tempUser.getUserName()))
             {
                 //set the updated values
-                user.setLoggedIn(tempUser.isLoggedIn());;
-                user.setLastUpdateTime(tempUser.getLastUpdateTime());
-                user.setRegisterTime(tempUser.getRegisterTime());
-                user.setIpAddress(tempUser.getIpAddress());
-                return userRepo.save(user);
+                tempUser.setLoggedIn(user.isLoggedIn());;
+                tempUser.setLastUpdateTime(user.getLastUpdateTime());
+                tempUser.setRegisterTime(user.getRegisterTime());
+                tempUser.setIpAddress(user.getIpAddress());
+                return userRepo.save(tempUser);
             }
 
         }
