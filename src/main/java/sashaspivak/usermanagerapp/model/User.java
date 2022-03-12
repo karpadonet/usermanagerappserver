@@ -18,6 +18,7 @@ public class User implements Serializable {
     private String lastUpdateTime;
     private String ipAddress;
     private boolean loggedIn;
+    private int loginCount;
 
     public User(){}
 
@@ -30,6 +31,7 @@ public class User implements Serializable {
         this.registerTime = registerTime;
         this.lastUpdateTime = lastUpdateTime;
         this.ipAddress = ipAddress;
+        this.loginCount = 0;
     }
 
     public void setId(long id) {
@@ -88,7 +90,15 @@ public class User implements Serializable {
         this.ipAddress = ipAddress;
     }
 
-    @Override
+    public int getLoginCount() {
+      return loginCount;
+    }
+
+    public void setLoginCount(int loginCount) {
+      this.loginCount = loginCount;
+    }
+
+  @Override
     public String toString() {
         return "User{" +
                 "id=" + id +

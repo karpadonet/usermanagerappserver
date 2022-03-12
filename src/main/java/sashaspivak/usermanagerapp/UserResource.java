@@ -29,6 +29,12 @@ public class UserResource {
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
+  @GetMapping("/findbyname/{userName}")
+  public ResponseEntity<User> getUser(@PathVariable("userName") String userName) throws Throwable {
+    User user = userService.findUser(userName);
+    return new ResponseEntity<>(user, HttpStatus.OK);
+  }
+
     @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User user){
         //User updateUser = userService.updateUser(user);
@@ -41,6 +47,8 @@ public class UserResource {
         User newUser = userService.addUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
+
+
 
 
 }
