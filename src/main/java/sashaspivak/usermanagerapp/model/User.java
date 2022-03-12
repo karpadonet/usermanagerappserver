@@ -14,10 +14,10 @@ public class User implements Serializable {
     private long id;
     private String userName;
     private String password;
-    private boolean loggedIn;
     private String registerTime;
     private String lastUpdateTime;
     private String ipAddress;
+    private boolean loggedIn;
 
     public User(){}
 
