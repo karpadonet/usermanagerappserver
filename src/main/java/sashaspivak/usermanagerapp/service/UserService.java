@@ -106,14 +106,11 @@ public class UserService {
         User tempUser;
 
         try{
-
+          //try to find the user
           tempUser = userRepo.findUserByUserName(user.getUserName()).get();
 
-            if(user.getUserName().equals(tempUser.getUserName()))
-            {
               //set the updated values
               tempUser.setLoggedIn(user.isLoggedIn());;
-
               if (user.isLoggedIn() == true) //increase the log in counter
                 tempUser.setLoginCount(tempUser.getLoginCount() + 1);
 
@@ -121,14 +118,11 @@ public class UserService {
               tempUser.setRegisterTime(user.getRegisterTime());
               tempUser.setIpAddress(user.getIpAddress());
               return userRepo.save(tempUser);
-            }
 
         }
         catch (Exception e) {
           throw new UserNotFoundException("User not found");
         }
-
-        return null;
     }
 
 }

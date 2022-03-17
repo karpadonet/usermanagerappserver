@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 //this class represents a user
-@Entity
-@Table (name = "users")
+@Entity//mapping our class to DB
+@Table (name = "users")//naming our DB table
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)//generates the id value when a new record is added
@@ -21,6 +21,7 @@ public class User implements Serializable {
     private int loginCount;
 
     public User(){}
+
 
     public User(String userName, String password, boolean loggedIn, long id, String registerTime, String lastUpdateTime,
                 String ipAddress) {
