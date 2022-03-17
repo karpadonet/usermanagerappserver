@@ -11,13 +11,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserResource {
-    private final UserService userService;
+    private final UserService userService;//bringing the service
 
     public UserResource(UserService userService) {
         this.userService = userService;
     }
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUser(){
+    public ResponseEntity<List<User>> getAllUser() throws Throwable{
         List<User> users = userService.findAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
@@ -36,14 +36,14 @@ public class UserResource {
   }
 
     @PutMapping("/update")
-    public ResponseEntity<User> updateUser(@RequestBody User user){
+    public ResponseEntity<User> updateUser(@RequestBody User user) throws Throwable{
         //User updateUser = userService.updateUser(user);
         User updateUser = userService.update(user);
         return new ResponseEntity<>(updateUser, HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<User> addUser(@RequestBody User user) {
+    public ResponseEntity<User> addUser(@RequestBody User user) throws Throwable {
         User newUser = userService.addUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
